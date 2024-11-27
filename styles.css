@@ -1,0 +1,122 @@
+body {
+	font-family: sans-serif;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	text-align: center;
+	background: #f2f2f2;
+}
+
+.popup {
+	position: fixed;
+	height: 100dvh;
+	width: 100dvw;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	visibility: hidden;
+	transition: 0.5s;
+}
+.popup .popup-content {
+	position: relative;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0px 0px 5px black;
+	min-width: 200px;
+	min-height: 100px;
+	padding: 5px;
+	transform: scale(0);
+	transition: 0.5s;
+}
+.popup[open] {
+	visibility: visible;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.popup[open] .popup-content{
+	transform: scale(1);
+}
+.popup .close {
+	color: red;
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	font-size: 20px;
+	cursor: pointer;
+	transition: 0.15s;
+}
+.popup .close:hover {
+	transform: rotate(90deg);
+}
+
+
+input {
+	padding: 6px 8px;
+	font-size: 14px;
+	border: 1px solid;
+	border-radius: 8px;
+	width: 100%;
+}
+select {
+	padding: 6px;
+	font-size: 14px;
+	border: 1px solid;
+	border-radius: 8px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin: 8px;
+	gap: 8px;
+}
+
+
+
+.action-btn {
+	padding: 1em 2em;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #000;
+	background-color: #fff;
+	border-radius: 12px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+.action-btn:hover, .action-btn:focus {
+	background-color: #23c483;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+.action-btn:active {
+	transform: translateY(-1px);
+}
+
+.simple-btn {
+	padding: 6px 14px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	border-radius: 8px;
+	border: none;
+	outline: 0;
+	color: #fff;
+	background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+	user-select: none;
+	cursor: pointer;
+	transition: 0.2s;
+	background-size: 1px 200px;
+}
+.simple-btn:hover {
+	background-position: 100px;
+}
+.simple-btn:focus {
+	filter: drop-shadow(0 0 2px rgba(58, 108, 217));
+}
+.simple-btn:active {
+	transform: translateY(2px);
+}
