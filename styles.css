@@ -17,6 +17,7 @@ body {
 	justify-content: center;
 	visibility: hidden;
 	transition: 0.5s;
+	z-index: 1;
 }
 .popup .popup-content {
 	position: relative;
@@ -64,12 +65,47 @@ select {
 	border-radius: 8px;
 }
 
-.row {
+.popup .row {
 	display: flex;
 	align-items: center;
 	margin: 8px;
 	gap: 8px;
 }
+
+.product-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	padding: 20px;
+}
+.product-list .product-item {
+	display: flex;
+	flex-direction: column;
+	background: bisque;
+	padding: 20px;
+	border-radius: 12px;
+	gap: 4px;
+}
+.product-list .product-item .title{
+	font-size: 1.4em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.product-list .product-item .info{
+	display: flex;
+	flex-direction: column;
+}
+.product-list .product-item .price{
+	font-size: 1.2em;
+	color: green;
+}
+.product-list .product-item .amount{
+	font-size: 0.8em;
+	color: #666;
+}
+
+
 
 
 
@@ -86,6 +122,7 @@ select {
 	cursor: pointer;
 	border: none;
 	outline: none;
+	user-select: none;
 }
 .action-btn:hover, .action-btn:focus {
 	background-color: #23c483;
