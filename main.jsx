@@ -6,19 +6,13 @@ const App = () => {
 	const openPopup = () => {setPopupOpen(true)};
 	const closePopup = () => {setPopupOpen(false)};
 
-	const [products, setProducts] = useState([
-		{name: 'Изюм',
-		price: 39.90,
-		amount: 200,
-		unit: 'gram'},
-		{name: 'Изюм 2',
-		price: 25.90,
-		amount: 150,
-		unit: 'gram'},
-	]);
+	const [products, setProducts] = useState([]);
 	const addProduct = (newProduct) => {
 		setProducts((prevProducts) => [...prevProducts, newProduct]);
 	};
+
+	const [displayType, setDisplayType] = useState("none");
+	const displayTypeChange = (e) => {setDisplayType(e.target.value)};
 
 	return (
 		<Fragment>
@@ -29,7 +23,15 @@ const App = () => {
 			/>
 			<h2>Сравнить товары</h2>
 			<button className="action-btn" onClick={openPopup}>Добавить</button>
-			<ProductList products={products}/>
+			<p>
+				<span>Рассчитать:</span>
+				<select value={displayType} onChange={displayTypeChange} style={{marginLeft: "10px"}}>
+					<option value="none">Нет</option>
+					<option value="perUnit">За 1 штуку</option>
+					<option value="per100g">За 100 грамм</option>
+				</select>
+			</p>
+			<ProductList products={products} displayType={displayType}/>
 		</Fragment>
 	);
 }
@@ -108,7 +110,7 @@ const Popup = ({ isOpen, addProduct, closePopup }) => {
 					/>
 					<select name="unit" value={unit} onChange={handleChange}>
 						<option value="things">штук</option>
-						<option value="gram">грам</option>
+						<option value="gram">грамм</option>
 					</select>
 				</div>
 				<button className="simple-btn" onClick={handleAddProduct}>Добавить</button>
@@ -117,21 +119,53 @@ const Popup = ({ isOpen, addProduct, closePopup }) => {
 	);
 }
 
-const Product = ({values}) => {
+const Product = ({values, displayType}) => {
 	const {name, price, amount, unit} = values;
+
+	function round(x){return Math.trunc(x*100)/100}
+	const unitNames = {
+		"things": "шт",
+		"gram": "г",
+	}
+
+	const displayTypes = {
+		none: {
+			price: price,
+			amountValue: amount,
+			amountText: unitNames[unit],
+		},
+		perUnit: {
+			price: round(price / amount),
+			amountValue: 1,
+			amountText: unitNames[unit],
+		},
+		per100g: {
+			price: round((price * 100) / amount),
+			amountValue: 100,
+			amountText: unitNames[unit],
+		},
+	}
+
+	const { price: pricePerUnit, amountValue, amountText } = displayTypes[displayType] || displayTypes.perUnit;
 
 	return (
 		<div className="product-item">
 			<div className="title">{name}</div>
 			<div className="info">
-				<div className="price">{price}₴</div>
-				<div className="amount">{amount}{unit}</div>
+				<div className="price">
+					<span className="value">{pricePerUnit}</span>
+					<span className="currency">₴</span>
+				</div>
+				<div className="amount">
+					<span className="value">{amountValue}</span>
+					<span className="currency">{amountText}</span>
+				</div>
 			</div>
 		</div>
 	)
 }
 
-const ProductList = ({products}) => {
+const ProductList = ({products, displayType}) => {
 	return (
 		<Fragment>
 			{products.length === 0 ? (
@@ -139,7 +173,7 @@ const ProductList = ({products}) => {
 			) : (
 				<div className="product-list">
 					{products.map((value, index) => (
-						<Product values={value} key={index}/>
+						<Product values={value} displayType={displayType} key={index}/>
 					))}
 				</div>
 			)}

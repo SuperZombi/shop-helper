@@ -77,7 +77,6 @@ select {
 	flex-direction: row;
 	justify-content: center;
 	gap: 10px;
-	padding: 20px;
 }
 .product-list .product-item {
 	display: flex;
@@ -92,10 +91,6 @@ select {
 	font-weight: bold;
 	text-transform: uppercase;
 }
-.product-list .product-item .info{
-	display: flex;
-	flex-direction: column;
-}
 .product-list .product-item .price{
 	font-size: 1.2em;
 	color: green;
@@ -104,9 +99,6 @@ select {
 	font-size: 0.8em;
 	color: #666;
 }
-
-
-
 
 
 .action-btn {
