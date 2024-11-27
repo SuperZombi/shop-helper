@@ -1,11 +1,11 @@
-const { useState, Fragment } = React;
+const { useState, useEffect, Fragment } = React;
 
 const App = () => {
 	const [isPopupOpen, setPopupOpen] = useState(false);
 	const openPopup = () => {setPopupOpen(true)};
 	const closePopup = () => {setPopupOpen(false)};
 
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')) || []);
 	const addProduct = (newProduct) => {
 		setProducts((prevProducts) => [...prevProducts, newProduct]);
 	};
@@ -15,6 +15,10 @@ const App = () => {
 
 	const [displayType, setDisplayType] = useState("none");
 	const displayTypeChange = (e) => {setDisplayType(e.target.value)};
+
+	useEffect(()=>{
+		localStorage.setItem('products', JSON.stringify(products))
+	}, [products])
 
 	return (
 		<Fragment>
