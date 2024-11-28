@@ -78,13 +78,14 @@ input {
 .product-list .product-item {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	background: white;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	border-radius: 10px;
 	gap: 4px;
 	position: relative;
-	min-width: 100px;
+	width: 100px;
 }
 .product-list .product-item .delete {
 	position: absolute;
